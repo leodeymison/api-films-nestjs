@@ -1,0 +1,32 @@
+// Extensão: REST Client
+
+### Create one
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "title": "Pica pau",
+    "image": "https://",
+    "movie_banner": "https://",
+    "description": "Pau pau pau",
+    "director": "pica pau",
+    "producer": "Pica pça",
+    "release_date": 1998
+}
+
+### Get All
+GET http://localhost:3000/users
+
+### Get One
+GET http://localhost:3000/users/630babab07c1713b35a93074
+
+### Delete One
+DELETE  http://localhost:3000/users/630babab07c1713b35a93074
+
+### Update One
+PATCH  http://localhost:3000/users/630bade8f4f320bf44aae6a7
+Content-Type: application/json
+
+{
+    "title": "Picman"
+}
