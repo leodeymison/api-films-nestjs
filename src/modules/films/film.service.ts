@@ -5,6 +5,7 @@ import { CreateFilmDto, UpdateFilmDto } from './dto';
 
 // interfaces
 import { Film } from './interface';
+import { DeleteType } from '../../interfaces/https-response';
 
 // db
 import { Model } from 'mongoose';
@@ -38,7 +39,7 @@ export class FilmService {
     return updateFilm;
   }
 
-  async deleteOne(id: string): Promise<any> {
+  async deleteOne(id: string): Promise<DeleteType> {
     const DeleteFilm = await this.FilmModel.deleteOne({ id });
     return DeleteFilm;
   }

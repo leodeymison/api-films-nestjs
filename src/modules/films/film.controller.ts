@@ -18,11 +18,12 @@ import { CreateFilmDto, UpdateFilmDto } from './dto';
 
 // interfaces
 import { Film } from './interface';
+import { DeleteType } from '../../interfaces/https-response';
 
 // db
 import { FilmClass } from 'src/schemas/Film';
 
-@Controller('/users')
+@Controller('/films')
 export class FilmControler {
   constructor(private films: FilmService) {}
 
@@ -62,9 +63,9 @@ export class FilmControler {
 
   @Delete(':id')
   async deleteOne(
-    @Res() res: Response<any>,
+    @Res() res: Response<DeleteType>,
     @Param('id') id: string,
-  ): Promise<any> {
+  ): Promise<Response<DeleteType>> {
     const response = await this.films.deleteOne(id);
     return res.status(200).json(response);
   }

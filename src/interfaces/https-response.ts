@@ -1,9 +1,9 @@
-export interface Delete {
+export interface DeleteType {
   acknowledged: boolean;
   deletedCount: number;
 }
 
-export interface Update {
+export interface UpdateType {
   acknowledged: boolean;
   modifiedCount: number;
   upsertedId: any;

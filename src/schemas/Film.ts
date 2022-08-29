@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 // type
-import { CreateFilm } from '../module/films/interface';
+import { CreateFilm } from '../modules/films/interface';
 
 export type FilmDocument = FilmClass & Document;
 
