@@ -23,7 +23,8 @@ import { Film } from './interface';
 import { DeleteType } from '../../interfaces/https-response';
 
 // db
-import { FilmClass } from 'src/schemas/Film';
+import { FilmClass } from '../../schemas/Film';
+import { JoiValidationPipe } from '../../utils/joiValidationPipe';
 
 @Controller('/films')
 export class FilmControler {
@@ -32,16 +33,17 @@ export class FilmControler {
   @Post()
   async createOne(
     @Res() res: Response<any>,
-    @Body() createFilmDto: CreateFilmDto,
+    @Body(new JoiValidationPipe()) createFilmDto: CreateFilmDto,
   ): Promise<Response<FilmClass>> {
     try {
       const response = await this.films.createOne(createFilmDto);
       return res.status(200).json(response);
     } catch (error) {
+      console.log(error);
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: 'Erro no servidor',
+          error: error.message,
         },
         HttpStatus.BAD_REQUEST,
       );
