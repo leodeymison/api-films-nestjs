@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Patch,
   Post,
@@ -32,14 +34,34 @@ export class FilmControler {
     @Res() res: Response<any>,
     @Body() createFilmDto: CreateFilmDto,
   ): Promise<Response<FilmClass>> {
-    const response = await this.films.createOne(createFilmDto);
-    return res.status(200).json(response);
+    try {
+      const response = await this.films.createOne(createFilmDto);
+      return res.status(200).json(response);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Erro no servidor',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
   @Get()
   async getAll(@Res() res: Response<Film[]>): Promise<Response<Film[]>> {
-    const response = await this.films.getAll();
-    return res.status(200).json(response);
+    try {
+      const response = await this.films.getAll();
+      return res.status(200).json(response);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Erro no servidor',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
   @Get(':id')
@@ -47,8 +69,18 @@ export class FilmControler {
     @Res() res: Response<Film>,
     @Param('id') id: string,
   ): Promise<Response<Film>> {
-    const response = await this.films.getOne(id);
-    return res.status(200).json(response);
+    try {
+      const response = await this.films.getOne(id);
+      return res.status(200).json(response);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Erro no servidor',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
   @Patch(':id')
@@ -57,8 +89,18 @@ export class FilmControler {
     @Param('id') id: string,
     @Body() updateFilmDto: UpdateFilmDto,
   ): Promise<any> {
-    const response = await this.films.updateOne(id, updateFilmDto);
-    return res.status(200).json(response);
+    try {
+      const response = await this.films.updateOne(id, updateFilmDto);
+      return res.status(200).json(response);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Erro no servidor',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
   @Delete(':id')
@@ -66,7 +108,17 @@ export class FilmControler {
     @Res() res: Response<DeleteType>,
     @Param('id') id: string,
   ): Promise<Response<DeleteType>> {
-    const response = await this.films.deleteOne(id);
-    return res.status(200).json(response);
+    try {
+      const response = await this.films.deleteOne(id);
+      return res.status(200).json(response);
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Erro no servidor',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 }
